@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "ColonyInTheConsole/1.0.0": {
+        "runtime": {
+          "ColonyInTheConsole.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ColonyInTheConsole/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

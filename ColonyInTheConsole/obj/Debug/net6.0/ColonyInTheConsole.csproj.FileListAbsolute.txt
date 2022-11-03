@@ -1,0 +1,15 @@
+C:\Users\ydool\Desktop\Repos\ColonyInTheConsole\ColonyInTheConsole\obj\Debug\net6.0\ColonyInTheConsole.csproj.AssemblyReference.cache
+C:\Users\ydool\Desktop\Repos\ColonyInTheConsole\ColonyInTheConsole\obj\Debug\net6.0\ColonyInTheConsole.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ydool\Desktop\Repos\ColonyInTheConsole\ColonyInTheConsole\obj\Debug\net6.0\ColonyInTheConsole.AssemblyInfoInputs.cache
+C:\Users\ydool\Desktop\Repos\ColonyInTheConsole\ColonyInTheConsole\obj\Debug\net6.0\ColonyInTheConsole.AssemblyInfo.cs
+C:\Users\ydool\Desktop\Repos\ColonyInTheConsole\ColonyInTheConsole\obj\Debug\net6.0\ColonyInTheConsole.csproj.CoreCompileInputs.cache
+C:\Users\ydool\Desktop\Repos\ColonyInTheConsole\ColonyInTheConsole\bin\Debug\net6.0\ColonyInTheConsole.exe
+C:\Users\ydool\Desktop\Repos\ColonyInTheConsole\ColonyInTheConsole\bin\Debug\net6.0\ColonyInTheConsole.deps.json
+C:\Users\ydool\Desktop\Repos\ColonyInTheConsole\ColonyInTheConsole\bin\Debug\net6.0\ColonyInTheConsole.runtimeconfig.json
+C:\Users\ydool\Desktop\Repos\ColonyInTheConsole\ColonyInTheConsole\bin\Debug\net6.0\ColonyInTheConsole.dll
+C:\Users\ydool\Desktop\Repos\ColonyInTheConsole\ColonyInTheConsole\bin\Debug\net6.0\ColonyInTheConsole.pdb
+C:\Users\ydool\Desktop\Repos\ColonyInTheConsole\ColonyInTheConsole\obj\Debug\net6.0\ColonyInTheConsole.dll
+C:\Users\ydool\Desktop\Repos\ColonyInTheConsole\ColonyInTheConsole\obj\Debug\net6.0\refint\ColonyInTheConsole.dll
+C:\Users\ydool\Desktop\Repos\ColonyInTheConsole\ColonyInTheConsole\obj\Debug\net6.0\ColonyInTheConsole.pdb
+C:\Users\ydool\Desktop\Repos\ColonyInTheConsole\ColonyInTheConsole\obj\Debug\net6.0\ColonyInTheConsole.genruntimeconfig.cache
+C:\Users\ydool\Desktop\Repos\ColonyInTheConsole\ColonyInTheConsole\obj\Debug\net6.0\ref\ColonyInTheConsole.dll

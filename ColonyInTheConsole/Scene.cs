@@ -13,6 +13,7 @@ namespace ColonyInTheConsole
 
 		private int _width;
 		private int _height;
+
 		
 
 		private List<Entity> _entities = new List<Entity>();
@@ -21,7 +22,6 @@ namespace ColonyInTheConsole
 		{
 			_width = width;
 			_height = height;
-			//_characters = charMap;
 		}
 
 		public void AddEntity(Entity entity)
@@ -34,7 +34,7 @@ namespace ColonyInTheConsole
 			_entities.Remove(entity);
 		}
 
-		public void Update(float dtMs)
+		public void Update()
 		{
 			
 		}

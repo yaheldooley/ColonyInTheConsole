@@ -1,14 +1,12 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using ColonyInTheConsole;
+using System.Text;
 
+Console.OutputEncoding = Encoding.UTF8;
 
-Window window = new Window();
-Scene scene = new Scene(100, 100);
+Console.SetWindowSize(Game.WindowWidth + 4, Game.ConsoleHeight);
 
-Person p = new Person("John Thomas", 34, 'X');
-scene.AddEntity(p);
-
-Game.Start(scene);
+Game.Start();
 
 

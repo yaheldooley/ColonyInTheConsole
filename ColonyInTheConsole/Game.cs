@@ -9,28 +9,30 @@ namespace ColonyInTheConsole
 	public static class Game
 	{
 		
-
-		public delegate void KeyPressedEventHandler(ConsoleKey key);
-		public delegate void KeyReleasedEventHandler(ConsoleKey key);
-
-		public static event KeyPressedEventHandler KeyPressed;
-		public static event KeyPressedEventHandler KeyReleased;
-
-		public static Window Window { get; private set; }
-
+		public static int WindowWidth = 100;
+		public static int ConsoleHeight = 40;
+		public static Dictionary<string, Window> AllWindows = new Dictionary<string, Window>();
+		public static Window activeWindow;
 		public static List<ConsoleKey> PressedKeys => _pressedKeys;
 		private static List<ConsoleKey> _pressedKeys = new List<ConsoleKey>();
 
-		public static void Start(Scene firstScene)
+		public static TimeSpan deltaTime;
+		public static void Start()
 		{
 			Console.CursorVisible = false;
 
-			//KeyWasPressed += KeyPressed;
+			var gameWindow = new GameWindow("ColonyInTheConsole", WindowWidth, ConsoleHeight - 20);
+			var menuWindow = new MenuWindow("MENU", WindowWidth, 4);
 
+			Scene scene = new Scene(100, 100);
+			Person p = new Person("John Thomas", 34, 'X');
+			scene.AddEntity(p);
+
+			activeWindow = gameWindow;
 			var startTime = DateTime.Now;
 
 			// Game Loop
-			while(true)
+			while (true)
 			{
 				// Get keyboard inputs
 				var oldKeysPressed = new List<ConsoleKey>(PressedKeys);
@@ -44,7 +46,8 @@ namespace ColonyInTheConsole
 				{
 					if (!oldKeysPressed.Contains(key))
 					{
-						KeyPressed?.Invoke(key); //KeyPressed Event
+						//KeyPressed Event
+						activeWindow.KeyPressed(key);
 					}
 				}
 
@@ -52,23 +55,29 @@ namespace ColonyInTheConsole
 				{
 					if (!PressedKeys.Contains(key))
 					{
-						KeyReleased?.Invoke(key); //KeyReleased Event
+						//KeyReleased Event
+						activeWindow.KeyReleased(key);
 					}
+				}
+				string change = activeWindow.GetChanges();
+				if (change != string.Empty)
+				{
+					InputParser.ParseInput(change);
+					//Do stuff like:
+					//Change Window
+					//Assign Character
 				}
 
 				var now = DateTime.Now;
-				var dt = now - startTime;
+				deltaTime = now - startTime;
 				startTime = now;
-				
+
+				scene.Update();
+
+				activeWindow.DisplayWindow();
 			}
 
 		}
-
-		private static void KeyWasPressed(object sender, ConsoleKey a)
-		{
-			//Console.WriteLine(startTime);
-		}
-
 
 	}
 }

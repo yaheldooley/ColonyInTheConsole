@@ -89,7 +89,12 @@ namespace ColonyInTheConsole
 		{
 			if (state != CanvasState.None && state != activeWindow.canvasState)
 			{
-				
+				if (AllWindows.ContainsKey(state))
+				{
+					activeWindow = AllWindows[state];
+					activeWindow.Dirty = true;
+				}
+				else Console.WriteLine($"No window for {state} exists");
 			}
 		}
 

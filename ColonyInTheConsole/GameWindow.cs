@@ -26,8 +26,7 @@ namespace ColonyInTheConsole
 
 		private string GetHotKeyString()
 		{
-			string hotkeyString = "\nHOTKEYS\n";
-			hotkeyString += $" [1] PERSON, [2] ASSIGN, [M] MENU";
+			string hotkeyString = " [1] PERSON, [2] ASSIGN, [M] MENU";
 			return hotkeyString;
 		}
 		

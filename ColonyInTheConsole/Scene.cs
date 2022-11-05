@@ -51,5 +51,14 @@ namespace ColonyInTheConsole
 		{
 			return pos.X <= (_width - 1) && pos.X >= 0 && pos.Y >= 0 && pos.Y <= (_height-1);
 		}
+
+		public static string DefaultScene()
+		{
+			string terrainString =	"!!||||!!!!|!|!|!|!|!|!|!|!|!|!|!|!|||!|!|!|!|!|!|!|!|!!|!!\n" +
+									"!||!!|!||!||!|!||!|||||||!||!!!!!!||!|!|||||!||!|||!||!|||\n" +
+									"|||!!!!!!    !!!! |!|! `` ``` ` `   ` ` ||||!|||!|||!``||`  ";
+
+			return terrainString;
+		}
 	}
 }

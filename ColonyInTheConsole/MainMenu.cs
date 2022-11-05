@@ -35,7 +35,7 @@
 		private string GetHotKeyString()
 		{
 			string hotkeyString = "";
-			hotkeyString += $" [N] START NEW GAME\n\n[O] OPTIONS";
+			hotkeyString += $"[N] NEW GAME\n\n[C] CONTINUE\n\n[O] OPTIONS ";
 			return hotkeyString;
 		}
 
@@ -43,8 +43,10 @@
 		{
 			switch (key)
 			{
-				case ConsoleKey.B:
-
+				case ConsoleKey.N:
+					Game.activeScene = new Scene(Game.ConsoleWidth, Game.ConsoleHeight);
+					Game.ChangeWindow(CanvasState.GamePlay);
+					Utils.JustifyContentTo2DCharArray(Game.activeWindow.WindowStatus, Utils.StringTo2DCharArray(Scene.DefaultScene(),new char[] {'\n' }), Align.TopCenter);
 					break;
 
 				default:

@@ -145,6 +145,21 @@ namespace ColonyInTheConsole
 					startY = (arrayToUpdate.GetLength(1) / 2) - (arrayToAdd.GetLength(1) / 2);
 					break;
 
+				case Align.TopLeft:
+					startX = 0;
+					startY = 0;
+					break;
+
+				case Align.TopCenter:
+					startX = (arrayToUpdate.GetLength(0) / 2) - (arrayToAdd.GetLength(0) / 2);
+					startY = 0;
+					break;
+
+				case Align.TopRight:
+					startX = arrayToUpdate.GetLength(0) - arrayToAdd.GetLength(0);
+					startY = 0;
+					break;
+
 			}
 			int endX = Math.Clamp(startX + arrayToAdd.GetLength(0), 0, arrayToUpdate.GetLength(0));
 			int endY = Math.Clamp(startY + arrayToAdd.GetLength(1), 0, arrayToUpdate.GetLength(1));

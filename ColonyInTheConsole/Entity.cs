@@ -14,6 +14,9 @@ namespace ColonyInTheConsole
 		public Vector2Int Pos;
 		public char charRep { get; set; }
 
+		public virtual void Update()
+		{
 		
+		}
 	}
 }

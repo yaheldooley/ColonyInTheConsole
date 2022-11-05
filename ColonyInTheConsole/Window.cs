@@ -8,6 +8,7 @@ namespace ColonyInTheConsole
 		public string Name = "";
 		public int Width = 0;
 		public int Height = 0;
+		public CanvasState canvasState;
 
 		public bool Dirty { get; set; }
 
@@ -22,12 +23,17 @@ namespace ColonyInTheConsole
 			WindowStatus = Utils.FillCharArray(width, height);
 			WindowStatus = Utils.CenterTextAtTopOfArray(WindowStatus, Name);
 			Dirty = true;
-			Game.AllWindows.Add(name, this);
 		}
 
-		public virtual string DisplayWindow()
+		public virtual void AddWindowToGame()
 		{
-			
+			Game.AllWindows.Add(canvasState, this);
+		}
+
+		public abstract void Update();
+
+		public virtual string DisplayWindowStatusContents()
+		{
 			Console.Clear();
 			string displayedString = string.Empty;
 			for (int i = 0; i < Height; i++)
@@ -42,7 +48,7 @@ namespace ColonyInTheConsole
 				}
 			}
 			return displayedString;
-		}
+		}		
 
 		public virtual void KeyPressed(ConsoleKey key)
 		{
@@ -51,14 +57,6 @@ namespace ColonyInTheConsole
 		public virtual void KeyReleased(ConsoleKey key)
 		{
 
-		}
-		protected string changedString;
-		public virtual string GetChanges()
-		{
-			string result = string.Empty;
-			result += changedString;
-			changedString = string.Empty;
-			return result;
 		}
 
 		public void SetPositionInWindow(int X, int Y, char c)
@@ -73,4 +71,5 @@ namespace ColonyInTheConsole
 			Dirty = true;
 		}
 	}
+
 }

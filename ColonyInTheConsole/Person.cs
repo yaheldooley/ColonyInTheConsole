@@ -9,5 +9,10 @@
 			charRep = character;
 			Pos = new Vector2Int(0, 0);
 		}
+
+		public override void Update()
+		{
+			
+		}
 	}
 }

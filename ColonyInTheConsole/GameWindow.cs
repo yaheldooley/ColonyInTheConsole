@@ -10,13 +10,15 @@ namespace ColonyInTheConsole
 	{
 		public GameWindow(string name, int width, int height) : base(name, width, height)
 		{
+			canvasState = CanvasState.GamePlay;
+			base.AddWindowToGame();
 		}
 
-		public override string DisplayWindow()
+		public override string DisplayWindowStatusContents()
 		{
 			if (!Dirty) return string.Empty;
 			Dirty = false;
-			string displayedString = base.DisplayWindow();
+			string displayedString = base.DisplayWindowStatusContents();
 			displayedString += GetHotKeyString();
 			Console.WriteLine(Utils.DrawInConsoleBox(displayedString));
 			return displayedString;
@@ -35,7 +37,7 @@ namespace ColonyInTheConsole
 			switch (key)
 			{
 				case ConsoleKey.M:
-					changedString = "MENU";
+				
 					break;
 
 				default:
@@ -49,5 +51,9 @@ namespace ColonyInTheConsole
 			
 		}
 
+		public override void Update()
+		{
+			
+		}
 	}
 }

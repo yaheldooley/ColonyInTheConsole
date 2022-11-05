@@ -36,7 +36,10 @@ namespace ColonyInTheConsole
 
 		public void Update()
 		{
-			
+			foreach(Entity e in _entities)
+			{
+				e.Update();
+			}
 		}
 
 		public char CharAt(Vector2Int pos)

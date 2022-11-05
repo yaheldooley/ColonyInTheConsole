@@ -99,5 +99,76 @@ namespace ColonyInTheConsole
 			}
 			return chars;
 		}
+
+		public static char[,] StringTo2DCharArray(string s, char[] splitters)
+		{
+			string[] lineArray = s.Split(splitters, StringSplitOptions.RemoveEmptyEntries);
+
+			int arrWidth = LargestLengthInStringArray(lineArray);
+			int arrHeight = lineArray.Length;
+
+			char[,] charArray = new char[arrWidth, arrHeight];
+			
+			for (int i = 0; i < arrHeight; i++)
+			{
+				char[] lineChars = lineArray[i].ToCharArray();
+
+
+				for (int j = 0; j < arrWidth; j++)
+				{
+					if (j < lineChars.Length) charArray[j, i] = lineChars[j];
+					else charArray[j, i] = ' ';
+				}
+			}
+			return charArray;
+		}
+
+		public static void JustifyContentTo2DCharArray(char[,] arrayToUpdate, char[,] arrayToAdd, Align alignment)
+		{
+			int startX = 0;
+			int startY = 0;
+
+			switch (alignment)
+			{
+				case Align.MiddleLeft:
+					startX = 0;
+					startY = (arrayToUpdate.GetLength(1) / 2) - (arrayToAdd.GetLength(1) / 2);
+					break;
+
+				case Align.MiddleCenter:
+					startX = (arrayToUpdate.GetLength(0) / 2) - (arrayToAdd.GetLength(0) / 2);
+					startY = (arrayToUpdate.GetLength(1) / 2) - (arrayToAdd.GetLength(1) / 2);
+					break;
+
+				case Align.MiddleRight:
+					startX = arrayToUpdate.GetLength(0) - arrayToAdd.GetLength(0);
+					startY = (arrayToUpdate.GetLength(1) / 2) - (arrayToAdd.GetLength(1) / 2);
+					break;
+
+			}
+			int endX = Math.Clamp(startX + arrayToAdd.GetLength(0), 0, arrayToUpdate.GetLength(0));
+			int endY = Math.Clamp(startY + arrayToAdd.GetLength(1), 0, arrayToUpdate.GetLength(1));
+
+			for (int y = startY; y  < endY; y++)
+			{
+				for (int x = startX; x < endX; x++)
+				{
+					int xIndex = x - startX;
+					int yIndex = y - startY;
+					arrayToUpdate[x, y] = arrayToAdd[xIndex, yIndex];
+				}
+
+			}
+		}
+
+		public static int LargestLengthInStringArray(string[] sArray)
+		{
+			int largestSoFar = 0;
+			foreach (string s in sArray)
+			{
+				if (s.Length > largestSoFar) largestSoFar = s.Length;
+			}
+			return largestSoFar;
+		}
 	}
 }

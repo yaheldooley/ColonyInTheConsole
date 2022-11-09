@@ -1,6 +1,6 @@
 ﻿namespace ColonyInTheConsole
 {
-	public enum CanvasState
+	public enum Viewing
 	{
 		None,
 		MainMenu,

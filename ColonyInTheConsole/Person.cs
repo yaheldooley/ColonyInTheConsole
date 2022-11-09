@@ -2,12 +2,13 @@
 {
 	public class Person : Entity
 	{
-		public Person(string name, int age, char character)
+		public Person(string name, int age, char character, int[,,]pos)
 		{
 			Name = name;
 			Age = age;
 			charRep = character;
-			Pos = new Vector2Int(0, 0);
+			Pos = pos;
+			Game.ActiveScene.EntityLocations.Add(Pos, charRep);
 		}
 
 		public override void Update()

@@ -1,18 +1,23 @@
 ﻿namespace ColonyInTheConsole
 {
-	public class MainMenu : Window
+	public class MainMenu : View
 	{
 		public MainMenu(string name, int width, int height) : base(name, width, height)
 		{
-			canvasState = CanvasState.MainMenu;
+			canvasState = Viewing.MainMenu;
 			base.AddWindowToGame();
+			SetViewStatus();
+		}
+		public override void DisplayWindowStatusContents()
+		{
+			if (!Dirty) return;
+			Dirty = false;
+			Game.Screen.FillDisplayWithViewContent(ViewStatus, Align.MiddleCenter);
 		}
 
-		public override string DisplayWindowStatusContents()
+		private void SetViewStatus()
 		{
-			if (!Dirty) return string.Empty;
-			Dirty = false;
-			string villageString =	"~         ~~          __\r\n" +
+			string artString =		"~         ~~          __\r\n" +
 									"       _T      .,,.    ~--~ ^^\r\n" +
 									" ^^   // \\                    ~\r\n" +
 									"      ][O]    ^^      ,-~ ~\r\n" +
@@ -24,18 +29,13 @@
 									"'  |[]|,.--'' '',   ''-,.    |\r\n" +
 									"  ..    ..-''    ;       ''. '";
 
-			Utils.JustifyContentTo2DCharArray( WindowStatus, Utils.StringTo2DCharArray( villageString, new char[] { '\n', '\r'}), Align.MiddleCenter );
-
-			string displayedString = base.DisplayWindowStatusContents();
-			displayedString += GetHotKeyString();
-			Console.WriteLine( Utils.DrawInConsoleBox(displayedString) );
-			return displayedString;
+			ViewStatus = Utils.StringTo2DCharArray(artString, new char[] { '\n', '\r' });
 		}
 
 		private string GetHotKeyString()
 		{
 			string hotkeyString = "";
-			hotkeyString += $"[N] NEW GAME\n\n[C] CONTINUE\n\n[O] OPTIONS ";
+			hotkeyString += $"\n[N] NEW GAME\n\n[C] CONTINUE\n\n[O] OPTIONS ";
 			return hotkeyString;
 		}
 
@@ -44,9 +44,8 @@
 			switch (key)
 			{
 				case ConsoleKey.N:
-					Game.activeScene = new Scene(Game.ConsoleWidth, Game.ConsoleHeight);
-					Game.ChangeWindow(CanvasState.GamePlay);
-					Utils.JustifyContentTo2DCharArray(Game.activeWindow.WindowStatus, Utils.StringTo2DCharArray(Scene.DefaultScene(),new char[] {'\n' }), Align.TopCenter);
+					Game.ChangeCamera(Viewing.GamePlay);
+					//Utils.JustifyContentTo2DCharArray(Game.activeWindow.CameraStatus, Utils.StringTo2DCharArray(Scene.DefaultScene(),new char[] {'\n' }), Align.TopCenter);
 					break;
 
 				default:
@@ -60,6 +59,16 @@
 		}
 
 		public override void Update()
+		{
+			
+		}
+
+		public override void OnEnable()
+		{
+			
+		}
+
+		public override void OnDisable()
 		{
 			
 		}

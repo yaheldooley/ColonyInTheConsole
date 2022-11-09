@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,29 +11,37 @@ namespace ColonyInTheConsole
 {
 	public static class Game
 	{
+		public static readonly int ConsoleWidth = 100;
+		public static readonly int ConsoleHeight = 40;
 		
-		public static int ConsoleWidth = 100;
-		public static int ConsoleHeight = 40;
 
-		public static Dictionary<CanvasState, Window> AllWindows = new Dictionary<CanvasState, Window>();
-		public static Window activeWindow = new MainMenu("Colony In The Console - Main Menu", ConsoleWidth, ConsoleHeight - 20);
+		public static Dictionary<Viewing, View> AllViews = new Dictionary<Viewing, View>();
+		public static View ActiveView;
+
+		public static Screen Screen; // Screen space
+		public static Scene ActiveScene; // World Space
+
 		public static List<ConsoleKey> PressedKeys => _pressedKeys;
 		private static List<ConsoleKey> _pressedKeys = new List<ConsoleKey>();
 
 		public static TimeSpan deltaTime;
 
-		public static Scene activeScene;
-
 		public static void Start()
 		{
 			Console.CursorVisible = false;
 
-			var gameWindow = new GameWindow("Colony In The Console", ConsoleWidth, ConsoleHeight - 20);
-			var pauseMenu = new PauseMenu("Pause Menu", ConsoleWidth, 4);
+			Screen = new Screen(ConsoleWidth, ConsoleHeight -10, 4);
+			ActiveScene = new Scene(ConsoleWidth, ConsoleHeight, 3, true);
 
-			//Scene scene = new Scene(100, 100);
-			//Person p = new Person("John Thomas", 34, 'X');
-			//scene.AddEntity(p);
+			var mainMenu =	new MainMenu("Colony In The Console", ConsoleWidth - Screen.BorderWidth, ConsoleHeight - 20);
+			var gameplay =	new GameWindow("Game", ConsoleWidth - Screen.BorderWidth, ConsoleHeight - 20);
+			var pauseMenu = new PauseMenu("Pause Menu", ConsoleWidth - Screen.BorderWidth, 4);
+
+			ActiveView = gameplay;
+			ChangeCamera(Viewing.MainMenu);
+
+			Person p = new Person("John Thomas", 34, '8', new int[15,15,0]);
+			ActiveScene.AddEntity(p);
 
 			var startTime = DateTime.Now;
 
@@ -45,13 +55,9 @@ namespace ColonyInTheConsole
 				deltaTime = now - startTime;
 				startTime = now;
 
-				activeWindow.Update();
+				ActiveView.Update();
 
-				//Do stuff like:
-				//Change Window
-				//Assign Character
-
-				activeWindow.DisplayWindowStatusContents();
+				UpdateCanvas();
 			}
 
 		}
@@ -71,7 +77,7 @@ namespace ColonyInTheConsole
 				if (!oldKeysPressed.Contains(key))
 				{
 					//KeyPressed Event
-					activeWindow.KeyPressed(key);
+					ActiveView.KeyPressed(key);
 				}
 			}
 
@@ -80,23 +86,36 @@ namespace ColonyInTheConsole
 				if (!PressedKeys.Contains(key))
 				{
 					//KeyReleased Event
-					activeWindow.KeyReleased(key);
+					ActiveView.KeyReleased(key);
 				}
 			}
 		}
 
-		public static void ChangeWindow(CanvasState state)
+		public static void ChangeCamera(Viewing state)
 		{
-			if (state != CanvasState.None && state != activeWindow.canvasState)
+			if (state != Viewing.None && state != ActiveView.canvasState)
 			{
-				if (AllWindows.ContainsKey(state))
+				if (AllViews.ContainsKey(state))
 				{
-					activeWindow = AllWindows[state];
-					activeWindow.Dirty = true;
+					ActiveView.OnDisable();
+					ActiveView = AllViews[state];
+					ActiveView.OnEnable();
+					ActiveView.Dirty = true;
 				}
 				else Console.WriteLine($"No window for {state} exists");
 			}
 		}
 
+		public static void UpdateCanvas()
+		{
+			if (ActiveView == null || ActiveScene == null) return;
+			if (!ActiveView.Dirty) return;
+			
+			//Utils.JustifyContentTo2DCharArray(Canvas, activeWindow.DisplayWindowStatusContents(), Align.TopLeft);
+			Screen.Refresh();
+		}
+
+
 	}
+
 }

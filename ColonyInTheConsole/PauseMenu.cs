@@ -6,22 +6,21 @@ using System.Threading.Tasks;
 
 namespace ColonyInTheConsole
 {
-	public class PauseMenu : Window
+	public class PauseMenu : View
 	{
 		public PauseMenu(string name, int width, int height) : base(name, width, height)
 		{
-			canvasState = CanvasState.PauseMenu;
+			canvasState = Viewing.PauseMenu;
 			base.AddWindowToGame();
+			ViewStatus = Utils.StringTo2DCharArray(GetHotKeyString(), new char[] { '\n', '\r' });
 		}
 
-		public override string DisplayWindowStatusContents()
+		public override void DisplayWindowStatusContents()
 		{
-			if (!Dirty) return string.Empty;
+			if (!Dirty) return;
 			Dirty = false;
-			string displayedString = base.DisplayWindowStatusContents();
-			displayedString += GetHotKeyString();
-			Console.WriteLine(Utils.DrawInConsoleBox(displayedString));
-			return displayedString;
+
+			Game.Screen.FillDisplayWithViewContent(ViewStatus, Align.TopCenter);
 		}
 
 		private string GetHotKeyString()
@@ -50,6 +49,16 @@ namespace ColonyInTheConsole
 		}
 
 		public override void Update()
+		{
+			
+		}
+
+		public override void OnEnable()
+		{
+			
+		}
+
+		public override void OnDisable()
 		{
 			
 		}

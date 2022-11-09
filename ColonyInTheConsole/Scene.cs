@@ -11,17 +11,26 @@ namespace ColonyInTheConsole
 		public int Width => _width;
 		public int Height => _height;
 
+		public char[,,] Map;
+
 		private int _width;
 		private int _height;
+		private int _depth;
 
-		
+		public bool GameWindowVisible = false;
 
-		private List<Entity> _entities = new List<Entity>();
+		public List<Entity> _entities = new List<Entity>();
+
+		public Dictionary<int[,,], char> EntityLocations = new Dictionary<int[,,], char>();
+
 		private char[,] _characters { get; set; }
-		public Scene(int width, int height)
+		public Scene(int width, int height, int depth, bool loadDefault)
 		{
 			_width = width;
 			_height = height;
+			_depth = depth;
+			Map = new char[_width, _height, _depth];
+			if (loadDefault) DefaultScene(Map);
 		}
 
 		public void AddEntity(Entity entity)
@@ -52,13 +61,27 @@ namespace ColonyInTheConsole
 			return pos.X <= (_width - 1) && pos.X >= 0 && pos.Y >= 0 && pos.Y <= (_height-1);
 		}
 
-		public static string DefaultScene()
+		public void ShowVisible()
+		{
+
+		}
+
+
+		public static void DefaultScene(char[,,] map)
 		{
 			string terrainString =	"!!||||!!!!|!|!|!|!|!|!|!|!|!|!|!|!|||!|!|!|!|!|!|!|!|!!|!!\n" +
 									"!||!!|!||!||!|!||!|||||||!||!!!!!!||!|!|||||!||!|||!||!|||\n" +
 									"|||!!!!!!    !!!! |!|! `` ``` ` `   ` ` ||||!|||!|||!``||`  ";
 
-			return terrainString;
+			MapFromString(terrainString, map);
+		}
+
+		public static void MapFromString(string mapString, char[,,] map)
+		{
+			var terrainArray = Utils.StringTo2DCharArray(mapString, new char[] { '\n' });
+
+			Utils.JustifyContentTo3DCharArray(map, terrainArray, 0, Align.TopCenter);
+			
 		}
 	}
 }

@@ -11,7 +11,7 @@ namespace ColonyInTheConsole
 		public string Name;
 		public int Age;
 		public string Sex;
-		public Vector2Int Pos;
+		public int[,,] Pos;
 		public char charRep { get; set; }
 
 		public virtual void Update()
